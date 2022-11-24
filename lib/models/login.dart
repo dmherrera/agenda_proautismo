@@ -6,7 +6,7 @@ part 'login.g.dart';
 class LoginReq{
   String username;
   String password;
-  LoginReq(this.password,this.username);
+  LoginReq(this.username,this.password);
   static LoginReq fromJson(Map<String, dynamic> json) => _$LoginReqFromJson(json);
   Map<String, dynamic> toJson() => _$LoginReqToJson(this);
 }
