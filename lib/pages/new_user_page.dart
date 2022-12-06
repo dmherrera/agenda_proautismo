@@ -94,7 +94,7 @@ class _NewUserPageState extends State<NewUserPage> {
 
                   status = "Ok";
                   message = "Usuario registrado exitosamente!";
-                  _showDialog(context)
+                  _showDialog(context);
                   context.router.push(MainRoute());
                 }),
               )
