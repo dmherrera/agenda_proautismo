@@ -16,7 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  
   TextEditingController correoController = TextEditingController();
   TextEditingController contraseniaController = TextEditingController();
 
@@ -27,12 +26,16 @@ class _LoginPageState extends State<LoginPage> {
     contraseniaController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: context.themeWatch.primaryColor,),
+      appBar: AppBar(
+        title: const Text('Login'),
+        backgroundColor: context.themeWatch.secondaryColor,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(24.0, 80.0, 24.0, 80.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -41,45 +44,50 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: correoController,
-                  decoration: InputDecoration(hintText: "Correo"),
+                  decoration: InputDecoration(labelText: "Correo"),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
                   controller: contraseniaController,
-                  decoration: InputDecoration(hintText: "Contraseña"),
+                  decoration: InputDecoration(labelText: "Contraseña"),
+                  obscureText: true,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(32.0),
-                child: Btn(text: "Iniciar sesión",primary: true, onPressed: () async {
-                  var correo = correoController.text;
-                  var contrasenia = contraseniaController.text;
-                  // validacion
+                child: Btn(
+                    text: "Iniciar sesión",
+                    primary: true,
+                    onPressed: () async {
+                      var correo = correoController.text;
+                      var contrasenia = contraseniaController.text;
+                      // validacion
 
-                  var r = await login(LoginReq(correo, contrasenia));
+                      var r = await login(LoginReq(correo, contrasenia));
 
-                  void _showDialog(BuildContext context) {
-                    MyAlertDialog  alert = MyAlertDialog("Error",r.msg.toString());
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return alert;
-                      },
-                    );
-                  }
+                      void _showDialog(BuildContext context) {
+                        MyAlertDialog alert =
+                            MyAlertDialog("Error", r.msg.toString());
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
+                      }
 
-                  if(!r.ok!){
-                    //error
-                    _showDialog(context);
-                    return;
-                  }
-                  var usuario = r.data!;
+                      if (!r.ok!) {
+                        //error
+                        _showDialog(context);
+                        return;
+                      }
+                      var usuario = r.data!;
 
-                  //continuamos
-                  context.router.push(CalendarRoute());
-                }),
+                      //continuamos
+                      context.router.push(CalendarRoute());
+                    }),
               )
             ],
           ),
