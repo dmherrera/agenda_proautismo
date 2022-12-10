@@ -16,7 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  
   TextEditingController correo = TextEditingController();
   TextEditingController passCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -27,13 +26,16 @@ class _LoginPageState extends State<LoginPage> {
     passCtrl.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: AppBar( backgroundColor: context.themeWatch.primaryColor,),
+      appBar: AppBar(
+        title: Text('Agenda ProAutismo'),
+        backgroundColor: context.themeWatch.secondaryColor,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(8, 120, 8, 50),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -41,55 +43,63 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 SuperTitle("Login"),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.fromLTRB(32, 8, 32, 20),
                   child: TextFormField(
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                     controller: correo,
-                    decoration: const InputDecoration(hintText: "Usuario"),
-                    validator: (text){
-                      if(text!.isEmpty) return "Debe ingresar un usuario";
+                    decoration: const InputDecoration(labelText: "Usuario"),
+                    validator: (text) {
+                      if (text!.isEmpty) return "Debe ingresar un usuario";
                       return null;
                     },
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.fromLTRB(32, 8, 32, 0),
                   child: TextFormField(
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                     controller: passCtrl,
                     obscureText: true,
-                    decoration: const InputDecoration(hintText: "Contraseña",),
-                    validator: (text){
-                      if(text!.isEmpty) return "Debe ingresar una contraseña";
+                    decoration: const InputDecoration(
+                      labelText: "Contraseña",
+                    ),
+                    validator: (text) {
+                      if (text!.isEmpty) return "Debe ingresar una contraseña";
                       return null;
                     },
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(32.0),
-                  child: Btn(text: "Iniciar sesión",primary: true, onPressed: () async {
-                    var text = correo.text;
-                    var pass = passCtrl.text;
-                    // validacion
-                    if(!_formKey.currentState!.validate()) return;
-                    var r = await login(LoginReq(text, pass));
-                    if(!r.ok!){
-                      //error
-                      Alert.alert(context, r.msg!);
-                      return;
-                    }
-                    var usuario = r.data!;
-                    var r2 = await getProfiles(usuario.UserId!);
-                    if(!r2.ok!){
-                      //error
-                      Alert.alert(context, r2.msg!);
-                      return;
-                    }
+                  child: Btn(
+                      text: "Iniciar sesión",
+                      primary: true,
+                      onPressed: () async {
+                        var text = correo.text;
+                        var pass = passCtrl.text;
+                        // validacion
+                        if (!_formKey.currentState!.validate()) return;
+                        var r = await login(LoginReq(text, pass));
+                        if (!r.ok!) {
+                          //error
+                          Alert.alert(context, r.msg!);
+                          return;
+                        }
+                        var usuario = r.data!;
+                        var r2 = await getProfiles(usuario.UserId!);
+                        if (!r2.ok!) {
+                          //error
+                          Alert.alert(context, r2.msg!);
+                          return;
+                        }
 
-                    var profiles = r2.data!;
-                    context.mainProvider.login(usuario,profiles.Profiles ?? []);
-                    //continuamos
-                    //context.router.push(CalendarRoute());
-                    context.router.pop();
-                  }),
+                        var profiles = r2.data!;
+                        context.mainProvider
+                            .login(usuario, profiles.Profiles ?? []);
+                        //continuamos
+                        //context.router.push(CalendarRoute());
+                        context.router.pop();
+                      }),
                 )
               ],
             ),

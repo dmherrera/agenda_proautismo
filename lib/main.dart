@@ -20,15 +20,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) => _mainProvider,
-      builder: (c,w){
-        return Consumer<MainProvider>(builder: (context,mainProvider,w){
+      builder: (c, w) {
+        return Consumer<MainProvider>(builder: (context, mainProvider, w) {
           return ChangeNotifierProvider(
             create: (BuildContext context) => ThemeProvider(),
-            builder: (c,w){
+            builder: (c, w) {
               //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-              return Consumer<MainProvider>(builder: (context,mainProvider,w){
+              return Consumer<MainProvider>(
+                  builder: (context, mainProvider, w) {
                 return MaterialApp.router(
+                  theme: ThemeData(fontFamily: 'Champagne'),
                   scrollBehavior: MyCustomScrollBehavior(),
                   routerDelegate: _appRouter.delegate(),
                   routeInformationParser: _appRouter.defaultRouteParser(),
@@ -39,7 +41,6 @@ class MyApp extends StatelessWidget {
         });
       },
     );
-
   }
 }
 //Para pantalla principal revisar /pages/main_page.dart

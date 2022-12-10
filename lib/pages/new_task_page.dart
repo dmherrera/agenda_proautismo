@@ -27,15 +27,18 @@ class _NewTaskPageState extends State<NewTaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: context.themeWatch.primaryColor,),
+      appBar: AppBar(
+        backgroundColor: context.themeWatch.secondaryColor,
+        title: Text('Agenda ProAutismo'),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(32.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SuperTitle("Nueva tarea"),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: SizedBox(
                   height: 66,
                   child: Center(
@@ -43,20 +46,26 @@ class _NewTaskPageState extends State<NewTaskPage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: Btn(text: "Tarea libre",primary: tareaLibre, onPressed: (){
-                            //context.router.push(AddChildRoute());
-                            setState(() {
-                              tareaLibre =true;
-                            });
-                          }),
+                          child: Btn(
+                              text: "Tarea libre",
+                              primary: tareaLibre,
+                              onPressed: () {
+                                //context.router.push(AddChildRoute());
+                                setState(() {
+                                  tareaLibre = true;
+                                });
+                              }),
                         ),
                         Expanded(
-                          child: Btn(text: "Interactiva",primary: !tareaLibre, onPressed: (){
-                            //context.router.push(AddChildRoute());
-                            setState(() {
-                              tareaLibre =false;
-                            });
-                          }),
+                          child: Btn(
+                              text: "Interactiva",
+                              primary: !tareaLibre,
+                              onPressed: () {
+                                //context.router.push(AddChildRoute());
+                                setState(() {
+                                  tareaLibre = false;
+                                });
+                              }),
                         ),
                       ],
                     ),
@@ -64,34 +73,38 @@ class _NewTaskPageState extends State<NewTaskPage> {
                 ),
               ),
 
-            if(!tareaLibre)DropdownButton<String>(
-              value: dropdownValue,isExpanded: true,
-              icon: const Icon(Icons.arrow_downward),
-              elevation: 16,
-              style: const TextStyle(color: Colors.deepPurple),
-              underline: Container(
-                height: 2,
-                color: Colors.deepPurpleAccent,
-              ),
-              onChanged: (String? value) {
-                // This is called when the user selects an item.
-                setState(() {
-                  dropdownValue = value!;
-                });
-              },
-              items: ["Tender la cama"].map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
+              if (!tareaLibre)
+                DropdownButton<String>(
+                  value: dropdownValue,
+                  isExpanded: true,
+                  icon: const Icon(Icons.arrow_downward),
+                  elevation: 16,
+                  style:
+                      const TextStyle(color: Color.fromARGB(255, 18, 91, 124)),
+                  underline: Container(
+                    height: 2,
+                    color: Color.fromARGB(255, 70, 180, 243),
+                  ),
+                  onChanged: (String? value) {
+                    // This is called when the user selects an item.
+                    setState(() {
+                      dropdownValue = value!;
+                    });
+                  },
+                  items: ["Tender la cama"]
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
 
-
-              if(tareaLibre)TextFormField(
-                controller: nameCtrl,
-                decoration: const InputDecoration(hintText: "Titulo"),
-              ),
+              if (tareaLibre)
+                TextFormField(
+                  controller: nameCtrl,
+                  decoration: const InputDecoration(labelText: "Titulo"),
+                ),
 
               // if(tareaLibre)TextFormField(
               //   decoration: InputDecoration(hintText: "Color"),
@@ -101,40 +114,55 @@ class _NewTaskPageState extends State<NewTaskPage> {
               // ),
 
               TextFormField(
-                decoration: const InputDecoration(hintText: "Fecha inicio"),
+                decoration: const InputDecoration(labelText: "Fecha inicio"),
               ),
               TextFormField(
-                decoration: const InputDecoration(hintText: "Fecha final",),
+                decoration: const InputDecoration(
+                  labelText: "Fecha final",
+                ),
               ),
-              if(file!=null) Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.file(file!,height: 100,),
-              ),
+              if (file != null)
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Image.file(
+                    file!,
+                    height: 100,
+                  ),
+                ),
               // if(tareaLibre)TextFormField(
               //   decoration: InputDecoration(hintText: "Imagen/Fondo"),
               // ),
               Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Btn(text: "Agregar imagen", onPressed: (){
-                    dropImage(context,(f){
-                      if(!f.ok!){
-                        Alert.alert(context, f.msg!);
-                        return;
-                      }
-                      setState(() {
-                        file = f.data;
-                      });
-                    });
-                  }),
+                  padding: const EdgeInsets.all(16.0),
+                  child: Btn(
+                      text: "Agregar imagen",
+                      onPressed: () {
+                        dropImage(context, (f) {
+                          if (!f.ok!) {
+                            Alert.alert(context, f.msg!);
+                            return;
+                          }
+                          setState(() {
+                            file = f.data;
+                          });
+                        });
+                      }),
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Btn(text: "Guardar",primary: true, onPressed: (){
-                  context.mainProvider.addTasksTmp(TaskMin()..TaskId=0..TaskType=(tareaLibre?1:2)..TaskTitle=nameCtrl.text..file=file);
-                  context.router.pop();
-                }),
+                child: Btn(
+                    text: "Guardar",
+                    primary: true,
+                    onPressed: () {
+                      context.mainProvider.addTasksTmp(TaskMin()
+                        ..TaskId = 0
+                        ..TaskType = (tareaLibre ? 1 : 2)
+                        ..TaskTitle = nameCtrl.text
+                        ..file = file);
+                      context.router.pop();
+                    }),
               )
             ],
           ),

@@ -63,7 +63,15 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  fonts:
+    - family: Champagne
+      fonts:
+      - asset: fonts/champagne&limousines.ttf
+    - family: Jost
+      fonts:
+      - asset: fonts/Jost-Light.ttf
+      - asset: fonts/Jost-Bold.ttf
+        weight: 700
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

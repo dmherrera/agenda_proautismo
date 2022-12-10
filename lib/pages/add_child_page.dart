@@ -16,11 +16,11 @@ class AddChildPage extends StatefulWidget {
 }
 
 class _AddChildPageState extends State<AddChildPage> {
-  TextEditingController nameCtrl =TextEditingController();
-  TextEditingController lastNameCtrl =TextEditingController();
-  TextEditingController usernameCtrl =TextEditingController();
-  TextEditingController passCtrl =TextEditingController();
-  TextEditingController pass2Ctrl =TextEditingController();
+  TextEditingController nameCtrl = TextEditingController();
+  TextEditingController lastNameCtrl = TextEditingController();
+  TextEditingController usernameCtrl = TextEditingController();
+  TextEditingController passCtrl = TextEditingController();
+  TextEditingController pass2Ctrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   void dispose() {
@@ -32,12 +32,16 @@ class _AddChildPageState extends State<AddChildPage> {
     pass2Ctrl.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: context.themeWatch.primaryColor, ),
+      appBar: AppBar(
+        backgroundColor: context.themeWatch.secondaryColor,
+        title: Text('Agenda ProAutismo'),
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(32.0),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -45,33 +49,43 @@ class _AddChildPageState extends State<AddChildPage> {
               children: [
                 SuperTitle("Datos del niño"),
                 TextFormField(
+                  //style: TextStyle(fontWeight: FontWeight.bold),
                   controller: nameCtrl,
-                  decoration: InputDecoration(hintText: "Nombre"),
-                  validator: (text){
-                    if(text == null || text.isEmpty) return "Es necesario registar su nombre" ;
+                  decoration: InputDecoration(labelText: "Nombre *"),
+                  validator: (text) {
+                    if (text == null || text.isEmpty)
+                      return "Es necesario registar su nombre";
                     return null;
                   },
                 ),
                 TextFormField(
+                  //style: TextStyle(fontWeight: FontWeight.bold),
                   controller: lastNameCtrl,
-                  decoration: InputDecoration(hintText: "Apellido"),
-                  validator: (text){
-                    if(text == null || text.isEmpty) return "Es necesario registar su apellido" ;
+                  decoration: InputDecoration(labelText: "Apellido *"),
+                  validator: (text) {
+                    if (text == null || text.isEmpty)
+                      return "Es necesario registar su apellido";
                     return null;
                   },
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Btn(text: "Guardar",primary: true, onPressed: ()async{
-                    if(!_formKey.currentState!.validate()) return;
-                    var r = await addProfiles(context.mainProvider.user!.UserId!,  AddUserProfileReq(nameCtrl.text,lastNameCtrl.text));
-                    if(!r.ok!) {
-                      await Alert.alert(this.context, r.msg!);
-                      return;
-                    }
+                  padding: const EdgeInsets.all(40.0),
+                  child: Btn(
+                      text: "Guardar",
+                      primary: true,
+                      onPressed: () async {
+                        if (!_formKey.currentState!.validate()) return;
+                        var r = await addProfiles(
+                            context.mainProvider.user!.UserId!,
+                            AddUserProfileReq(
+                                nameCtrl.text, lastNameCtrl.text));
+                        if (!r.ok!) {
+                          await Alert.alert(this.context, r.msg!);
+                          return;
+                        }
 
-                    context.router.pop();
-                  }),
+                        context.router.pop();
+                      }),
                 )
               ],
             ),

@@ -18,68 +18,108 @@ class _TaskReviewPageState extends State<TaskReviewPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( backgroundColor: context.themeWatch.primaryColor,),
+      appBar: AppBar(
+        backgroundColor: context.themeWatch.secondaryColor,
+        title: Text('Agenda ProAutismo'),
+      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-
           children: [
             Spacer(),
             SuperTitle(widget.task.TaskTitle!),
-            if(widget.task.TaskType!=2)Image.network("https://ip20soft.tech/proautismo/assets/images/tasks-nodes/8.png",height: 100,),
-
-            if(widget.task.TaskType!=2 && widget.task.file==null)Icon(Icons.category_outlined,size: 100,color: Colors.black12,),
-            if(widget.task.TaskType!=2 && widget.task.file!=null)Flexible(child: Image.file(widget.task.file!,)),
+            if (widget.task.TaskType != 2)
+              Image.network(
+                "https://ip20soft.tech/proautismo/assets/images/tasks-nodes/8.png",
+                height: 100,
+              ),
+            if (widget.task.TaskType != 2 && widget.task.file == null)
+              Icon(
+                Icons.category_outlined,
+                size: 100,
+                color: Colors.black12,
+              ),
+            if (widget.task.TaskType != 2 && widget.task.file != null)
+              Flexible(
+                  child: Image.file(
+                widget.task.file!,
+              )),
             Spacer(),
-            if(context.mainWatch.level==0) CalificationBtn(value: 2, onTab: (){exit(2);}),
-
-            if(context.mainWatch.level==1)Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CalificationBtn(value: 2, onTab: (){exit(2);}),
-                CalificationBtn(value: 0, onTab: (){exit(0);}),
-              ],
-            ),
-
-            if(context.mainWatch.level==2)Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CalificationBtn(value: 2, onTab: (){exit(2);}),
-                CalificationBtn(value: 1, onTab: (){exit(1);}),
-                CalificationBtn(value: 0, onTab: (){exit(0);}),
-              ],
-            ),
+            if (context.mainWatch.level == 0)
+              CalificationBtn(
+                  value: 2,
+                  onTab: () {
+                    exit(2);
+                  }),
+            if (context.mainWatch.level == 1)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CalificationBtn(
+                      value: 2,
+                      onTab: () {
+                        exit(2);
+                      }),
+                  CalificationBtn(
+                      value: 0,
+                      onTab: () {
+                        exit(0);
+                      }),
+                ],
+              ),
+            if (context.mainWatch.level == 2)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CalificationBtn(
+                      value: 2,
+                      onTab: () {
+                        exit(2);
+                      }),
+                  CalificationBtn(
+                      value: 1,
+                      onTab: () {
+                        exit(1);
+                      }),
+                  CalificationBtn(
+                      value: 0,
+                      onTab: () {
+                        exit(0);
+                      }),
+                ],
+              ),
             Spacer(),
           ],
         ),
       ),
     );
   }
-  exit(int value){
+
+  exit(int value) {
     context.router.popUntilRouteWithName(CalendarRoute.name);
   }
 }
 
-
 class CalificationBtn extends StatelessWidget {
-   final int value;
-   late Color color;
-   late IconData icon;
+  final int value;
+  late Color color;
+  late IconData icon;
 
-   final Function() onTab;
-   CalificationBtn({required this.value,required this.onTab, Key? key}) : super(key: key){
+  final Function() onTab;
+  CalificationBtn({required this.value, required this.onTab, Key? key})
+      : super(key: key) {
     // var color = Colors.green;
     // var icon = Icons.check_circle_outline;
-    if(value == 0){
+    if (value == 0) {
       color = Colors.red;
       icon = Icons.cancel_outlined;
-    } else if(value == 1){
+    } else if (value == 1) {
       color = Colors.yellow;
       icon = Icons.circle_outlined;
-    }else if(value == 2){
+    } else if (value == 2) {
       color = Colors.green;
       icon = Icons.check_circle_outline;
-    }else{
+    } else {
       color = Colors.green;
       icon = Icons.check_circle_outline;
     }
@@ -87,26 +127,23 @@ class CalificationBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       width: 120,
       height: 120,
       child: Card(
-        color:color ,
+        color: color,
         shape: RoundedRectangleBorder(
-
-          side:  BorderSide(
-              color: color, width: 5),
+          side: BorderSide(color: color, width: 5),
           borderRadius: BorderRadius.circular(100),
         ),
         elevation: 0,
         child: InkWell(
-          borderRadius:BorderRadius.circular(100),
+          borderRadius: BorderRadius.circular(100),
           onTap: onTab,
           child: Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(icon,size: 60,color: context.themeWatch.white),
+              child: Icon(icon, size: 60, color: context.themeWatch.white),
             ),
           ),
         ),

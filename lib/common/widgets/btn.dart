@@ -38,7 +38,6 @@ class Btn extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: context.themeWatch.primaryColor,
-
                 ),
               )),
         Row(
@@ -57,7 +56,7 @@ class Btn extends StatelessWidget {
                                 ? context.themeWatch.primaryColor
                                 : primary
                                     ? Colors.transparent
-                                    : context.themeWatch.black),
+                                    : context.themeWatch.brown),
                         side: MaterialStateProperty.all<BorderSide>(BorderSide(
                             color: primary
                                 ? Provider.of<ThemeProvider>(context).black
@@ -74,7 +73,7 @@ class Btn extends StatelessWidget {
                     onPressed: !enabled || loading ? null : onPressed,
                     child: loading
                         ? Center(
-                          child: SizedBox(
+                            child: SizedBox(
                               height: 20,
                               width: 20,
                               child: CircularProgressIndicator(
@@ -87,15 +86,15 @@ class Btn extends StatelessWidget {
                                           : Provider.of<ThemeProvider>(context)
                                               .black)),
                             ),
-                        )
+                          )
                         : Padding(
                             padding: const EdgeInsets.all(4.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                if(leftIcon!=null) leftIcon!,
-                                if(leftIcon!=null) const Spacer(),
+                                if (leftIcon != null) leftIcon!,
+                                if (leftIcon != null) const Spacer(),
                                 Text(
                                   text,
                                   style: TextStyle(
