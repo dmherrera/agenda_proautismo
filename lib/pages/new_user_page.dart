@@ -112,8 +112,8 @@ class _NewUserPageState extends State<NewUserPage> {
                       text: "Guardar",
                       primary: true,
                       onPressed: () async {
-                        if (!_formKey.currentState!.validate()) return;
-                        var r = await sigUp(SignUpReq(
+                        if (!_formKey.currentState!.validate()) { return; };
+                        var r = await signUp(SignUpReq(
                             passCtrl.text,
                             usernameCtrl.text,
                             nameCtrl.text,
@@ -121,10 +121,11 @@ class _NewUserPageState extends State<NewUserPage> {
                         if (!r.ok!) {
                           await Alert.alert(this.context, r.msg!);
                           return;
+                        } else {
+                          await Alert.alert(
+                              this.context, "Usuario registrado correctamente");
+                          await context.router.replace(const LoginRoute());
                         }
-                        await Alert.alert(
-                            this.context, "Usuario registrado correctamente");
-                        await context.router.replace(const LoginRoute());
                       }),
                 )
               ],

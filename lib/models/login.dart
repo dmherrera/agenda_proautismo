@@ -8,7 +8,7 @@ class SignUpReq{
   String password;
   String firstName;
   String lastName;
-  SignUpReq(this.password,this.username,this.firstName,this.lastName);
+  SignUpReq(this.username,this.password,this.firstName,this.lastName);
   static SignUpReq fromJson(Map<String, dynamic> json) => _$SignUpReqFromJson(json);
   Map<String, dynamic> toJson() => _$SignUpReqToJson(this);
 }
