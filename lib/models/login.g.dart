@@ -7,8 +7,8 @@ part of 'login.dart';
 // **************************************************************************
 
 SignUpReq _$SignUpReqFromJson(Map<String, dynamic> json) => SignUpReq(
-      json['password'] as String,
       json['username'] as String,
+      json['password'] as String,
       json['firstName'] as String,
       json['lastName'] as String,
     );

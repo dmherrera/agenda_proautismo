@@ -5,7 +5,7 @@ import 'package:agenda_proautismo/common/requests.dart';
 import 'package:agenda_proautismo/common/result.dart';
 import 'package:agenda_proautismo/models/login.dart';
 
-Future<Result<UserMin?>> sigUp(SignUpReq data) async {
+Future<Result<UserMin?>> signUp(SignUpReq data) async {
   return await Requests.postRes(
       mkurl("/users/sign_up"),data,
       UserMin.fromJson);
