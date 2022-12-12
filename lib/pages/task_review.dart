@@ -27,23 +27,41 @@ class _TaskReviewPageState extends State<TaskReviewPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Spacer(),
+
             SuperTitle(widget.task.TaskTitle!),
-            if (widget.task.TaskType != 2)
-              Image.network(
-                "https://ip20soft.tech/proautismo/assets/images/tasks-nodes/8.png",
-                height: 100,
+
+            if (widget.task.TaskType != 2 &&
+                widget.task.TaskTitle == 'Lavarse Los Dientes')
+              Image.asset(
+                "../assets/brushTeeth.png",
+                height: 250,
               ),
-            if (widget.task.TaskType != 2 && widget.task.file == null)
+            if (widget.task.TaskType != 2 &&
+                widget.task.TaskTitle == 'Preparar la mesa')
+              Image.asset(
+                "../assets/setTheTable.png",
+                height: 250,
+              ),
+            if (widget.task.TaskType != 2 &&
+                widget.task.TaskTitle == 'Vestirse')
+              Image.asset(
+                "../assets/clothes.png",
+                height: 250,
+              ),
+
+            //eliminado temporal en lo que se agregan imagenes
+            /* if (widget.task.TaskType != 2 && widget.task.file == null)
               Icon(
                 Icons.category_outlined,
                 size: 100,
                 color: Colors.black12,
-              ),
+              ), */
             if (widget.task.TaskType != 2 && widget.task.file != null)
               Flexible(
                   child: Image.file(
                 widget.task.file!,
               )),
+
             Spacer(),
             if (context.mainWatch.level == 0)
               CalificationBtn(

@@ -35,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: context.themeWatch.secondaryColor,
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 120, 8, 50),
+        padding: const EdgeInsets.fromLTRB(8, 80, 8, 50),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,

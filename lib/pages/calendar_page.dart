@@ -7,6 +7,7 @@ import 'package:agenda_proautismo/models/tasks.dart';
 import 'package:agenda_proautismo/provider/main_provider.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _CalendarPageState extends State<CalendarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: context.themeWatch.primaryColor,
+        backgroundColor: context.themeWatch.secondaryColor,
         title: Text('Agenda ProAutismo'),
         actions: [
           IconButton(
@@ -117,7 +118,7 @@ class CalendarCard extends StatelessWidget {
                         // ),
                         TitleText(
                           data.TaskTitle!,
-                          color: Colors.white,
+                          color: Colors.black,
                         ),
                         Spacer(),
                         Padding(
@@ -130,8 +131,10 @@ class CalendarCard extends StatelessWidget {
                                 Icon(
                                   Icons.play_arrow,
                                   color: Colors.white,
-                                  size: 24,
+                                  size: 34,
+                                  semanticLabel: 'Interactiva',
                                 ),
+
                               if (data.TaskType != 2)
                                 Icon(
                                   Icons.play_arrow,
@@ -167,19 +170,28 @@ class CalendarCard extends StatelessWidget {
                       child: Image.network(
                     "https://ip20soft.tech/proautismo/assets/images/tasks-nodes/8.png",
                   )),
-                if (data.TaskType != 2 && data.file == null)
+                //temporal - de momento ninguno es null
+                /* if (data.TaskType != 2 && data.file == null)
                   Flexible(
                     child: Icon(
                       Icons.category_outlined,
                       size: 100,
                       color: Colors.black12,
                     ),
-                  ),
-                if (data.TaskType != 2 && data.file != null)
+                  ), */
+                //imagenes temporales
+                if (data.TaskType != 2 &&
+                    data.TaskTitle == 'Lavarse Los Dientes')
+                  Flexible(child: Image.asset('../assets/brushTeeth.png')),
+                if (data.TaskType != 2 && data.TaskTitle == 'Preparar la mesa')
+                  Flexible(child: Image.asset('../assets/setTheTable.png')),
+                if (data.TaskType != 2 && data.TaskTitle == 'Vestirse')
+                  Flexible(child: Image.asset('../assets/clothes.png')),
+                /* if (data.TaskType != 2 && data.file != null)
                   Flexible(
                       child: Image.file(
                     data.file!,
-                  )),
+                  )), */
               ],
             ),
           ),
