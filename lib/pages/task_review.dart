@@ -33,19 +33,19 @@ class _TaskReviewPageState extends State<TaskReviewPage> {
             if (widget.task.TaskType != 2 &&
                 widget.task.TaskTitle == 'Lavarse Los Dientes')
               Image.asset(
-                "../assets/brushTeeth.png",
+                "assets/brushTeeth.png",
                 height: 250,
               ),
             if (widget.task.TaskType != 2 &&
                 widget.task.TaskTitle == 'Preparar la mesa')
               Image.asset(
-                "../assets/setTheTable.png",
+                "assets/setTheTable.png",
                 height: 250,
               ),
             if (widget.task.TaskType != 2 &&
                 widget.task.TaskTitle == 'Vestirse')
               Image.asset(
-                "../assets/clothes.png",
+                "assets/clothes.png",
                 height: 250,
               ),
 

@@ -27,7 +27,10 @@ class SuperTitle extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(32),
         child: Text(title,
-            style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold)));
+            style: const TextStyle(
+                fontFamily: 'Champagne',
+                fontSize: 28,
+                fontWeight: FontWeight.bold)));
   }
 }
 
@@ -42,7 +45,11 @@ class Subtitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       this.title,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: color),
+      style: TextStyle(
+          fontFamily: 'Jost',
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: color),
       textAlign: TextAlign.start,
     );
   }

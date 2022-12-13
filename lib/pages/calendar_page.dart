@@ -182,11 +182,11 @@ class CalendarCard extends StatelessWidget {
                 //imagenes temporales
                 if (data.TaskType != 2 &&
                     data.TaskTitle == 'Lavarse Los Dientes')
-                  Flexible(child: Image.asset('../assets/brushTeeth.png')),
+                  Flexible(child: Image.asset('assets/brushTeeth.png')),
                 if (data.TaskType != 2 && data.TaskTitle == 'Preparar la mesa')
-                  Flexible(child: Image.asset('../assets/setTheTable.png')),
+                  Flexible(child: Image.asset('assets/setTheTable.png')),
                 if (data.TaskType != 2 && data.TaskTitle == 'Vestirse')
-                  Flexible(child: Image.asset('../assets/clothes.png')),
+                  Flexible(child: Image.asset('assets/clothes.png')),
                 /* if (data.TaskType != 2 && data.file != null)
                   Flexible(
                       child: Image.file(

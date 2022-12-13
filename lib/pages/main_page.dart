@@ -42,10 +42,11 @@ class _MainPageState extends State<MainPage> {
           child: Padding(
             padding: const EdgeInsets.all(32.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Image.asset(
-                  '../assets/proAutismo.png',
+                  'assets/proAutismo.png',
                   height: 80.0,
                 ),
                 const Text(
@@ -104,7 +105,7 @@ class _MainPageState extends State<MainPage> {
                             text: "Cerrar sesión",
                             onPressed: (() {
                               Alert.alert(
-                                  context, "Seguro que quiere serar sesión",
+                                  context, "Seguro que quiere cerrar sesión",
                                   cancel: () {}, ok: () {
                                 context.mainProvider.logOut();
                               });
@@ -113,7 +114,7 @@ class _MainPageState extends State<MainPage> {
                       Expanded(
                         child: Btn(
                             primary: true,
-                            text: "Agregar perfil",
+                            text: "Nuevo perfil",
                             onPressed: (() async {
                               await context.router.push(const AddChildRoute());
                               var r2 = await getProfiles(
@@ -150,8 +151,8 @@ class _ProfileCardState extends State<ProfileCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 125,
-      width: 125,
+      height: 80,
+      width: 80,
       child: InkWell(
         onTap: () async {
           context.mainProvider.setLevel(level);
@@ -240,14 +241,14 @@ class _ProfileCardState extends State<ProfileCard> {
               if (image == null)
                 const Icon(
                   Icons.emoji_emotions,
-                  size: 100,
+                  size: 80,
                   color: Colors.green,
                 ),
               if (image != null)
                 Image.file(
                   image!,
-                  height: 100,
-                  width: 100,
+                  height: 80,
+                  width: 80,
                   fit: BoxFit.cover,
                 ),
               Subtitle(widget.profile.FirstName ?? "s"),

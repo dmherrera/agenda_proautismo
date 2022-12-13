@@ -70,7 +70,7 @@ class _SpecialTaskSelectPageState extends State<SpecialTaskSelectPage> {
         Alert.alertChild(
             context,
             SizedBox(
-              height: 162,
+              height: 172,
               child: Column(
                 children: [
                   CalificationBtn(value: 1, onTab: () {}),
@@ -112,6 +112,7 @@ class _SpecialTaskSelectPageState extends State<SpecialTaskSelectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          title: const Text('Como tender la cama?'),
           backgroundColor: context.themeWatch.secondaryColor,
         ),
         body: SingleChildScrollView(
@@ -144,7 +145,9 @@ class _SpecialTaskSelectPageState extends State<SpecialTaskSelectPage> {
                                   context.mainWatch.level == 2)
                                 Text(
                                   e.TaskNodeOption ?? "",
-                                  style: const TextStyle(),
+                                  style: const TextStyle(
+                                      fontFamily: 'Jost',
+                                      fontWeight: FontWeight.bold),
                                   textAlign: TextAlign.center,
                                 ),
                             ],
